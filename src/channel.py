@@ -20,7 +20,7 @@ class Channel:
 
     def get_channel_info(self) -> dict:
         """Запрос к API и получение информации о канале в виде словаря."""
-        apikey = os.environ.get('YT_API_KEY')
+        apikey = os.environ.get('API_KEY')
         url = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id={self.channel_id}&key={apikey}"
         response = requests.get(url)
         if response.status_code == 200:

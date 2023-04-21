@@ -7,8 +7,9 @@ class Channel:
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
-        self.channel_info = []
+
         self.channel_id = channel_id
+        self.api_key = os.environ.get('API_KEY')
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
@@ -20,7 +21,7 @@ class Channel:
     def get_channel_info(self) -> dict:
         """Запрос к API и получение информации о канале в виде словаря."""
         apikey = os.environ.get('YT_API_KEY')
-        url = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id={self.channel_info}&key={apikey}"
+        url = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id={self.channel_id}&key={apikey}"
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()

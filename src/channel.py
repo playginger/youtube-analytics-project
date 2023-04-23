@@ -73,3 +73,7 @@ class Channel:
                         }
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(channel_dict, f, indent=2, ensure_ascii=False)
+
+    @channel_id.setter
+    def channel_id(self, value):
+        self._channel_id = value

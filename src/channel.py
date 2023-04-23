@@ -42,9 +42,9 @@ class Channel:
                 'title': data['items'][0]['snippet']['title'],
                 'description': data['items'][0]['snippet']['description'],
                 'video_count': data['items'][0]['snippet']['video_count'],
-                'views_count':data['items'][0]['snippet']['views_count'],
+                'views_count': data['items'][0]['snippet']['views_count'],
                 'subscriberCount': data['items'][0]['statistics']['subscriberCount'],
-                'url': data['items'][0]['snippet']['url'],
+                'url': f'https://www.youtube.com/channel/{self.channel_id}'
             }
             return channel_info
         else:
@@ -55,6 +55,10 @@ class Channel:
     def get_service(cls):
         return build('youtube', 'v3', developerKey=cls.api_key)
 
+    @property
+    def channel_id(self):
+        return self.channel_id
+
     def to_json(self, filename):
         channel_dict = {"id": self.channel_id,
                         "title": self.title,
@@ -62,7 +66,11 @@ class Channel:
                         "url": self.url,
                         "description": self.description,
                         "subscriberCount": self.subscriberCount,
-                        "views_count":self.views_count
+                        "views_count": self.views_count
                         }
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(channel_dict, f, indent=2, ensure_ascii=False)
+
+    @channel_id.setter
+    def channel_id(self, value):
+        self._channel_id = value

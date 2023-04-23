@@ -1,5 +1,9 @@
+import googleapiclient
 import requests
 import os
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+import json
 
 
 class Channel:
@@ -34,3 +38,20 @@ class Channel:
         else:
             print("Ошибка при запросе к API")
             return {}
+
+    @classmethod
+    def get_service(cls, api_key: str) -> 'googleapiclient.discovery.Resource':
+        credentials = Credentials.from_authorized_user_info(info=None)
+        service = build('youtube', 'v3', developerKey=api_key, credentials=credentials)
+        return service
+
+    def to_json(self, file_path: str) -> None:
+        with open(file_path, 'w') as f:
+            json.dump(self.__dict__, f, indent=4)
+
+
+if __name__ == '__main__':
+    channel_id = 'UC_x5XG1OV2P6uZZ5FSM9Ttw'
+    api_key = os.environ.get('API_KEY')
+    vdud = Channel(channel_id, )
+    vdud.print_info()

@@ -37,8 +37,6 @@ class Channel:
     def __ge__(self, other):
         return int(self.subscriberCount) >= int(other.subscriberCount)
 
-
-
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         channel_info = self.get_channel_info()

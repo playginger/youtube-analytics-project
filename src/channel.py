@@ -3,7 +3,7 @@ import os
 from googleapiclient.discovery import build
 import json
 
-
+вы
 class Channel:
     """Класс для ютуб-канала"""
 

@@ -1,5 +1,5 @@
+import datetime
 import os
-from datetime import timedelta
 import isodate
 from googleapiclient.discovery import build
 
@@ -29,7 +29,7 @@ class PlayList:
 
     @property
     def total_duration(self):
-        res = timedelta()
+        res = datetime.timedelta()
 
         for video in self.video_response['items']:
             # YouTube video duration is in ISO 8601 format
@@ -39,6 +39,7 @@ class PlayList:
         return res
 
     def show_best_video(self):
+        global best_video
         likes = 0
 
         for video_id in self.video_ids:
